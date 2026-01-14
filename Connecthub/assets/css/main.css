@@ -1,6 +1,6 @@
 @import url("fontawesome-all.min.css");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic");
-
+/* @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic"); */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 /*
 	Alpha by HTML5 UP
 	html5up.net | @ajlkn
@@ -202,7 +202,7 @@ input,
 select,
 textarea {
 	color: #777;
-	font-family: "Source Sans Pro", sans-serif;
+	font-family: "Crimson Text", serif;
 	font-size: 16pt;
 	font-weight: 300;
 	line-height: 1.65em;
@@ -3274,7 +3274,7 @@ body.landing #page-wrapper {
 #banner {
 	background-attachment: scroll, fixed;
 	background-color: #072b4f;
-	background-image: url("../../images/mainpic.png");
+	background-image: url("images/overlay.png"), url("../../images/mainpic.png");
 	background-position: top left, center center;
 	background-repeat: repeat, no-repeat;
 	background-size: auto, cover;
