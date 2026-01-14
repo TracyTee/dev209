@@ -2522,27 +2522,27 @@ input[type="radio"]+label:before {
 }
 
 .icon.major.accent1 {
-	background: #072b4f;
+	background: #1A9f88;
 	color: #ffffff;
 }
 
 .icon.major.accent2 {
-	background: #e89980;
+	background: #F7D052;
 	color: #ffffff;
 }
 
 .icon.major.accent3 {
-	background: #7fcdb8;
+	background: #7B3E9D;
 	color: #ffffff;
 }
 
 .icon.major.accent4 {
-	background: #90b0ba;
+	background: #3A8A48;
 	color: #ffffff;
 }
 
 .icon.major.accent5 {
-	background: #e5cb95;
+	background: #3A81A8;
 	color: #ffffff;
 }
 
@@ -3273,7 +3273,7 @@ body.landing #page-wrapper {
 
 #banner {
 	background-attachment: scroll, fixed;
-	background-color: #666;
+	background-color: #072b4f;
 	background-image: url("images/overlay.png"), url("../../images/banner.jpg");
 	background-position: top left, center center;
 	background-repeat: repeat, no-repeat;
@@ -3418,7 +3418,7 @@ body.landing #main {
 /* CTA */
 
 #cta {
-	background: #e89980;
+	background: #072b4f;
 	color: #f9e6df;
 	padding: 3.5em 0 4em 0;
 	text-align: center;
