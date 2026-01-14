@@ -2506,7 +2506,7 @@ input[type="radio"]+label:before {
 }
 
 .icon.major {
-	background: #666;
+	background: #072b4f;
 	border-radius: 100%;
 	color: #ffffff;
 	cursor: default;
@@ -2522,7 +2522,7 @@ input[type="radio"]+label:before {
 }
 
 .icon.major.accent1 {
-	background: #666;
+	background: #072b4f;
 	color: #ffffff;
 }
 
