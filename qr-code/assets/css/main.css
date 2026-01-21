@@ -1,24 +1,31 @@
 /* Body styling */
 body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    background-color: hsl(212, 45%, 89%);
+    font-family: 'Outfit', sans-serif;
+
+}
+
+/* Styling for single qr on page */
+body:has(.qr-display) {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: hsl(212, 45%, 89%);
-    font-family: 'Outfit', sans-serif;
+    padding: 0;
+
 
 }
 
 /* QR code container styling*/
 .qr-display {
     background-color: hsl(0, 0%, 100%);
-    justify-content: center;
     border-radius: 20px;
     padding: 16px;
     margin: 16px;
     max-width: 320px;
-    width: calc(100%-32px);
+    width: calc(100% - 32px);
     text-align: center;
 }
 
@@ -69,7 +76,7 @@ img {
 }
 
 /*QR grid styling */
-/* .qr-grid {
+.qr-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
     gap: 24px;
@@ -77,4 +84,4 @@ img {
     list-style: none;
     padding: 0;
     margin: 0 auto;
-} */
+}
