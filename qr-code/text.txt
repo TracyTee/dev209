@@ -1,1 +1,17 @@
-Creating folder
+- Creating folder
+- Download starter files
+- Comment out unnecessary code
+- Add body
+- Modify body background color
+- Add QR code container
+- Add QR code image
+- Center container to page
+- Round conners : image and container
+- Modify padding
+- Modify text : font family, size, position, styling
+- Test flexibility 
+- Modify CSS to fix flex bug
+- Fix font family link bug
+- Test WCAG requirements
+- Fixes for WCAG requirements: heading sizes, default image sizes, margins, clamp
+
