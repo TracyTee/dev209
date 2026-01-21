@@ -25,7 +25,7 @@ body:has(.qr-display) {
     padding: 16px;
     margin: 16px;
     max-width: 320px;
-    width: calc(100% - 32px);
+    width: 100%;
     text-align: center;
 }
 
@@ -67,24 +67,41 @@ img {
     border-radius: 16px;
 }
 
+/* small screen adjustments */
+@media (max-width: 360px) {
+    img {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+}
+
 /*individual qr card styling */
 .qr-contents {
     background-color: hsl(0, 0%, 100%);
     border-radius: 20px;
     padding: 16px;
     text-align: center;
-    flex: 0 0 auto;
+    /*  flex: 0 0 auto;
     width: 320px;
-    max-width: calc(100% - 32px);
+    max-width: calc(100% - 32px); */
 }
 
 /*QR grid styling */
 .qr-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
     gap: 24px;
     justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0 auto;
+    max-width: 1400px
+}
+
+/* Adjust for screen size adjustment */
+@media (min-width: 1000px) {
+    .qr-contents:nth-child(4):last-child {
+        grid-column: 2 / 3;
+    }
 }
