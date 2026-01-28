@@ -1,8 +1,14 @@
+body {
+    font-family: 'Arial', Arial, Helvetica, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
 .gameContainer {
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 600px;
+    width: min(600px, 95vmin);
     margin: 0 auto;
     gap: 10px;
 }
@@ -10,20 +16,62 @@
 .card {
     background-color: #2b177d;
     color: white;
-    padding: 20px;
+    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 16px;
     aspect-ratio: 1;
+    min-height: 40px;
+    min-width: 40px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow: hidden;
 
 }
 
 h1 {
     text-align: center;
-    font-family: 'Dancing Script', cursive;
-    font-size: 48px;
+    font-family: 'Arial', Arial, Helvetica, sans-serif;
+    font-size: 28px;
     color: #333;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.gameControls {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.gameControls label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.gameControls select {
+    font-size: 16px;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 2px solid #2b177d;
+}
+
+.gameControls button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #177d36;
+    color: white;
+    cursor: pointer;
+}
+
+.instructions {
+    max-width: 600px;
+    margin: 0 auto 10px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    font-size: small;
 }
