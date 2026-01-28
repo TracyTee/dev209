@@ -14,6 +14,8 @@ let lockCard = false;
 let moves = 0;
 let matchedPairs = 0;
 let totalPairs = 0;
+let timerInterval = null;
+let seconds = 0;
 
 //shuffle function
 function shuffle(array) {
@@ -22,6 +24,30 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+//timer
+function startTimer() {
+    seconds = 0;
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        seconds++;
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    document.getElementById('timerDisplay').textContent =
+        `${minutes}:${secs.toString().padStart(2, '0')}`;
 }
 
 //test game
@@ -36,6 +62,8 @@ function testGame(array) {
 
 //start game
 function startGame(gridSize) {
+
+    stopTimer();
 
     cardOne = null;
     cardTwo = null;
@@ -79,6 +107,7 @@ function startGame(gridSize) {
         cardContainer.appendChild(card);
     }
 
+    startTimer();
 }
 //card click event
 function handleCardClick() {
@@ -87,7 +116,7 @@ function handleCardClick() {
         return;
     }
 
-    this.textContent = this.dataset.color;
+    //this.textContent = this.dataset.color;
     this.style.backgroundColor = this.dataset.color;
     this.classList.add('flipped');
 
@@ -114,8 +143,12 @@ function checkMatch() {
 
         //check win
         if (matchedPairs === totalPairs) {
+            stopTimer();
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            const timestring = `${minutes} minutes and ${secs} seconds`;
             setTimeout(() => {
-                alert(`Game Over! You won in ${moves} moves!`);
+                alert(`Game Over! You won in ${moves} moves and ${timestring}!`);
             }, 500);
         }
     } else {

@@ -22,8 +22,6 @@ body {
     align-items: center;
     font-size: 16px;
     aspect-ratio: 1;
-    min-height: 40px;
-    min-width: 40px;
     box-sizing: border-box;
     word-wrap: break-word;
     overflow: hidden;
