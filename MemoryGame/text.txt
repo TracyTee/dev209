@@ -1,3 +1,7 @@
 - basic grid functinality 
 - 4*4 grid
 - onclick display color and color name
+- check match
+- track moves
+- game over logic
+- spread tiles
