@@ -17,6 +17,68 @@ let totalPairs = 0;
 let timerInterval = null;
 let seconds = 0;
 
+//sessionstorage for total moves and other states across games
+function saveGameState() {
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const cardStates = cards.map(card => ({
+        color: card.dataset.color,
+        isFlipped: card.classList.contains('flipped'),
+        backgroundColor: card.style.backgroundColor
+    }));
+    const gameState = {
+        cardStates: cardStates,
+        moves: moves,
+        matchedPairs: matchedPairs,
+        totalPairs: totalPairs,
+        seconds: seconds,
+        gridSize: parseInt(document.getElementById('Level').value),
+        lockCard: lockCard
+    };
+    sessionStorage.setItem('memoryGameState', JSON.stringify(gameState));
+}
+
+//load game state
+function loadGameState() {
+    const savedState = sessionStorage.getItem('memoryGameState');
+    if (!savedState) {
+        return null;
+    }
+    try {
+        return JSON.parse(savedState);
+    } catch (e) {
+        console.error('Failed to load saved game state:', e);
+        sessionStorage.removeItem('memoryGameState');
+        return null;
+    }
+}
+
+//clear game state
+function clearGameState() {
+    sessionStorage.removeItem('memoryGameState');
+}
+
+//local storage: save across tabs
+function getGlobalMoves() {
+    const globalMoves = localStorage.getItem('memoryGameGlobalMoves');
+    return globalMoves ? parseInt(globalMoves) : 0;
+}
+
+//add to global moves
+function incrementGlobalMoves() {
+    const currentGlobal = getGlobalMoves();
+    localStorage.setItem('memoryGameGlobalMoves', (currentGlobal + 1).toString());
+    updateGlobalMovesDisplay();
+}
+
+//update global moves display
+function updateGlobalMovesDisplay() {
+    const globalMoves = getGlobalMoves();
+    const displayElement = document.getElementById('globalMovesDisplay');
+    if (displayElement) {
+        displayElement.textContent = globalMoves;
+    }
+}
+
 //shuffle function
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -33,6 +95,7 @@ function startTimer() {
     timerInterval = setInterval(() => {
         seconds++;
         updateTimerDisplay();
+        saveGameState();
     }, 1000);
 }
 
@@ -54,7 +117,7 @@ function updateMovesDisplay() {
     document.getElementById('movesDisplay').textContent = moves;
 }
 
-//test game
+//test game - basic card functionality
 function testGame(array) {
     //set color array to one color
     for (let i = 0; i < array.length; i++) {
@@ -62,7 +125,6 @@ function testGame(array) {
     }
     return array;
 }
-
 
 //start game
 function startGame(gridSize) {
@@ -113,6 +175,7 @@ function startGame(gridSize) {
     }
 
     startTimer();
+    saveGameState();
 }
 //card click event
 function handleCardClick() {
@@ -128,6 +191,7 @@ function handleCardClick() {
     //cardone
     if (!cardOne) {
         cardOne = this;
+        saveGameState();
     }
     //cardtwo
     else {
@@ -135,6 +199,8 @@ function handleCardClick() {
         lockCard = true;
         moves++;
         updateMovesDisplay();
+        incrementGlobalMoves();
+        saveGameState();
 
         checkMatch();
     }
@@ -146,6 +212,7 @@ function checkMatch() {
     if (cardOne.dataset.color === cardTwo.dataset.color) {
         matchedPairs++;
         resetTurn();
+        saveGameState();
 
         //check win
         if (matchedPairs === totalPairs) {
@@ -155,6 +222,7 @@ function checkMatch() {
             const timestring = `${minutes} minutes and ${secs} seconds`;
             setTimeout(() => {
                 alert(`Game Over! You won in ${moves} moves and ${timestring}!`);
+                clearGameState();
             }, 500);
         }
     } else {
@@ -166,6 +234,7 @@ function checkMatch() {
             cardTwo.classList.remove('flipped');
 
             resetTurn();
+            saveGameState();
         }, 1000);
     }
 }
@@ -191,5 +260,75 @@ document.getElementById('newButton').addEventListener('click', function () {
     startGame(difficulty);
 });
 
+//keep state on page reload
+function restoreGameState() {
+    const savedState = loadGameState();
+    if (!savedState) {
+        startGame(4);
+        return;
+    }
+    //restore variables
+    moves = savedState.moves;
+    matchedPairs = savedState.matchedPairs;
+    totalPairs = savedState.totalPairs;
+    seconds = savedState.seconds;
+    lockCard = savedState.lockCard;
+
+    document.getElementById('Level').value = savedState.gridSize;
+    updateMovesDisplay();
+    updateTimerDisplay();
+
+    //redraw grid
+    const cardContainer = document.querySelector('.gameContainer');
+    cardContainer.innerHTML = '';
+    cardContainer.style.gridTemplateColumns = `repeat(${savedState.gridSize}, 1fr)`;
+    cardContainer.style.gridTemplateRows = `repeat(${savedState.gridSize}, 1fr)`;
+
+    //recreate cards and state
+    savedState.cardStates.forEach((cardState, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = index + 1;
+        card.dataset.color = cardState.color;
+
+        if (cardState.isFlipped) {
+            card.style.backgroundColor = card.dataset.color;
+            card.classList.add('flipped');
+        }
+        card.addEventListener('click', handleCardClick);
+        cardContainer.appendChild(card);
+    });
+
+    //restart timer
+    startTimer();
+}
 //default
-startGame(4);
+//startGame(4);
+
+//test
+
+//initialize global moves display
+updateGlobalMovesDisplay();
+restoreGameState();
+
+//tab changes listener
+window.addEventListener('storage', (e) => {
+    if (e.key === 'memoryGameGlobalMoves') {
+        updateGlobalMovesDisplay();
+    }
+});
+
+// test cross tab synchronization
+/* document.getElementById('testGlobalIncrement').addEventListener('click', () => {
+    incrementGlobalMoves();
+    alert('Global moves incremented by 1!');
+}); */
+
+//reset all storage
+/* document.getElementById('resetAllStorage').addEventListener('click', () => {
+    if (confirm('Reset all? This will clear total moves across all games.')) {
+        sessionStorage.clear();
+        localStorage.removeItem('memoryGameGlobalMoves');
+        location.reload();
+    }
+}); */
