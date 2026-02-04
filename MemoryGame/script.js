@@ -50,6 +50,10 @@ function updateTimerDisplay() {
         `${minutes}:${secs.toString().padStart(2, '0')}`;
 }
 
+function updateMovesDisplay() {
+    document.getElementById('movesDisplay').textContent = moves;
+}
+
 //test game
 function testGame(array) {
     //set color array to one color
@@ -70,6 +74,7 @@ function startGame(gridSize) {
     lockCard = false;
     moves = 0;
     matchedPairs = 0;
+    updateMovesDisplay();
 
     if (gridSize === 4) {
         totalPairs = 8;
@@ -129,6 +134,7 @@ function handleCardClick() {
         cardTwo = this;
         lockCard = true;
         moves++;
+        updateMovesDisplay();
 
         checkMatch();
     }

@@ -73,3 +73,10 @@ h1 {
     border-radius: 8px;
     font-size: small;
 }
+
+.timer,
+.moves {
+    font-size: 18px;
+    margin-left: 15px;
+    font-weight: bold;
+}
