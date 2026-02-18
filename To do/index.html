@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Login -->
+    <div class="container">
+        <h1 class="app-title">Todo App</h1>
+        <div id="login-section">
+            <div class="form-card">
+                <h2>Login</h2>
+
+                <p id="login-error" class="error-text" hidden></p>
+
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Enter username">
+
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter password">
+
+                <button id="login-button" class="primary-button">Login</button>
+
+                <p class="switch-text">
+                    Don't have an account?
+                    <span id="show-register-link" class="link">Register here</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Register -->
+        <div id="register-section" hidden>
+            <div class="form-card">
+                <h2>Register</h2>
+
+                <p id="register-error" class="error-text" hidden></p>
+                <p id="register-success" class="success-text" hidden></p>
+
+                <label for="register-username">Username</label>
+                <input type="text" id="register-username" placeholder="Choose a username">
+
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" placeholder="Choose a password">
+
+                <label for="register-confirm">Confirm Password</label>
+                <input type="password" id="register-confirm" placeholder="Confirm your password">
+
+                <button id="register-button" class="primary-button">Register</button>
+
+                <p class="switch-text">
+                    Already have an account?
+                    <span id="show-login-link" class="link">Login here</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Todo List -->
+        <div id="todo-section" hidden>
+
+            <!-- Top bar with username and logout -->
+            <div class="top-bar">
+                <span id="welcome-text">Hello, user!</span>
+                <button id="logout-button" class="logout-button">Logout</button>
+            </div>
+
+            <h2>My Todo List</h2>
+
+            <p id="todo-error" class="error-text" hidden></p>
+
+            <!-- Form to add a new todo -->
+            <div class="add-todo-box">
+                <h3>Add New Todo</h3>
+                <input type="text" id="todo-title-input" placeholder="Todo title (required)">
+                <input type="text" id="todo-desc-input" placeholder="Description (optional)">
+                <button id="add-todo-button" class="add-button">+ Add Todo</button>
+            </div>
+
+
+            <div id="todo-list"></div>
+
+        </div>
+    </div>
+
+    <!---- scripts -->
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
